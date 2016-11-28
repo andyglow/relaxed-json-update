@@ -1,7 +1,5 @@
 # Relaxed JSON Update
 [![Build Status](https://travis-ci.org/andyglow/relaxed-json-update.svg)](https://travis-ci.org/andyglow/relaxed-json-update)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update_2.11)
-[![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update/images/download.svg)](https://bintray.com/andyglow/scala-tools/relaxed-json-update/_latestVersion)
 
 Relaxed (partial) case class update with json.
 
@@ -143,13 +141,25 @@ How your code could look like by using this solution:
 ```
 
 The same will work for `akka-http` as well.
- 
-As a bonus there are support for
-various popular json libs:
-- play-json
-- spray-json
-- jenkins (scala module)
-- circe
-- upickle
-- argonaut
-- json4s
+
+### SBT
+```scala
+libraryDependencies += "com.github.andyglow" %% "relaxed-json-update-api" % "${LATEST_VERSION}"
+// and one of
+libraryDependencies += "com.github.andyglow" %% "relaxed-json-update-play-json" % "${LATEST_VERSION}"
+libraryDependencies += "com.github.andyglow" %% "relaxed-json-update-spray-json" % "${LATEST_VERSION}"
+libraryDependencies += "com.github.andyglow" %% "relaxed-json-update-jackson" % "${LATEST_VERSION}"
+libraryDependencies += "com.github.andyglow" %% "relaxed-json-update-circe" % "${LATEST_VERSION}"
+libraryDependencies += "com.github.andyglow" %% "relaxed-json-update-upickle" % "${LATEST_VERSION}"
+libraryDependencies += "com.github.andyglow" %% "relaxed-json-update-argonaut" % "${LATEST_VERSION}"
+libraryDependencies += "com.github.andyglow" %% "relaxed-json-update-json4s" % "${LATEST_VERSION}"
+```
+
+- api [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-api/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-api/_latestVersion)
+- play-json [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-play-json/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-play-json/_latestVersion)
+- spray-json [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-spray-json/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-spray-json/_latestVersion)
+- jackson (scala module) [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-jackson/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-jackson/_latestVersion)
+- circe [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-circe/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-circe/_latestVersion)
+- upickle [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-upickle/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-upickle/_latestVersion)
+- argonaut [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-argonaut/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-argonaut/_latestVersion)
+- json4s [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-json4s/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-json4s/_latestVersion)

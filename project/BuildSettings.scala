@@ -3,6 +3,7 @@ import Keys._
 
 object BuildSettings {
   val ver = "0.0.1"
+  val projectId = "relaxed-json-update"
 
   lazy val noSources = Seq(
     unmanagedSourceDirectories in Compile := Seq.empty[File],
@@ -23,6 +24,6 @@ object BuildSettings {
     scalacOptions in Compile ++= Seq("-unchecked", "-deprecation", "-target:jvm-1.8", "-Ywarn-unused-import"),
     scalacOptions in(Compile, doc) ++= Seq("-unchecked", "-deprecation", "-implicits", "-skip-packages", "samples"),
     scalacOptions in(Compile, doc) ++= Opts.doc.title("Relaxed Json Update"),
-    scalacOptions in(Compile, doc) ++= Opts.doc.version(ver))
+    scalacOptions in(Compile, doc) ++= Opts.doc.version(ver)) ++ Bintray.settings
 
 }
