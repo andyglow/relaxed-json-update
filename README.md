@@ -1,4 +1,8 @@
 # Relaxed JSON Update
+[![Build Status](https://travis-ci.org/andyglow/relaxed-json-update.svg)](https://travis-ci.org/andyglow/relaxed-json-update)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update_2.11)
+[![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update/images/download.svg)](https://bintray.com/andyglow/scala-tools/relaxed-json-update/_latestVersion)
+
 Relaxed (partial) case class update with json.
 
 ## Problem
