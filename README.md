@@ -1,5 +1,6 @@
 # Relaxed JSON Update
 [![Build Status](https://travis-ci.org/andyglow/relaxed-json-update.svg)](https://travis-ci.org/andyglow/relaxed-json-update)
+[![codecov](https://codecov.io/gh/andyglow/relaxed-json-update/branch/master/graph/badge.svg)](https://codecov.io/gh/andyglow/relaxed-json-update)
 
 Relaxed (partial) case class update with json.
 
