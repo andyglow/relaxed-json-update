@@ -5,11 +5,13 @@ import BuildSettings._
 
 object Bintray {
 
+  lazy val release = taskKey[Unit]("Do the Release")
+
   lazy val settings = Seq(
     publishMavenStyle := true,
     publishArtifact in Test := false,
     pomIncludeRepository := { _ => false },
-    bintrayReleaseOnPublish in ThisBuild := false,
+    bintrayReleaseOnPublish in ThisBuild := true,
     licenses += ("LGPL-3.0", url("https://www.gnu.org/licenses/lgpl-3.0.html")),
     bintrayPackageLabels := Seq("scala", "tools", "rest", "json", "relaxed", "partial"),
     bintrayRepository := "scala-tools",
@@ -26,7 +28,12 @@ object Bintray {
             <name>Andrey Onistchuk</name>
             <url>https://ua.linkedin.com/in/andyglow</url>
           </developer>
-        </developers>
+        </developers>,
+    release := {
+      publish.value
+      bintrayRemoteSign.value
+      bintraySyncMavenCentral.value
+    }
   )
 
 }

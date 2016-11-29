@@ -7,3 +7,9 @@ cache:
   directories:
     - $HOME/.ivy2
     - $HOME/.sbt
+
+script:
+  - sbt clean coverage test coverageReport
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -t "7ba3b157-798f-4dfd-bf88-82bd104932e9"
