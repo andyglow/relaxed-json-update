@@ -139,8 +139,12 @@ How your code could look like by using this solution:
    }
  }
 ```
-
 The same will work for `akka-http` as well.
+
+It is also possible to mark certain fields as not participating in update.
+```scala
+case class Profile(@skip id: String, name: String, password: String)
+```
 
 ### SBT
 ```scala
