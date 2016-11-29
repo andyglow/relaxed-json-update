@@ -2,4 +2,5 @@ package com.github.andyglow.relaxed
 
 import scala.annotation.StaticAnnotation
 
-object skip extends StaticAnnotation
+@scala.annotation.meta.field
+class skip extends StaticAnnotation

@@ -21,7 +21,7 @@ object BuildSettings {
     libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.1" % Test,
     libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.1" % Test,
 
-    scalacOptions in Compile ++= Seq("-unchecked", "-deprecation", "-target:jvm-1.8", "-Ywarn-unused-import"),
+    scalacOptions in Compile ++= Seq("-unchecked", "-feature", "-deprecation", "-target:jvm-1.8", "-Ywarn-unused-import"),
     scalacOptions in(Compile, doc) ++= Seq("-unchecked", "-deprecation", "-implicits", "-skip-packages", "samples"),
     scalacOptions in(Compile, doc) ++= Opts.doc.title("Relaxed Json Update"),
     scalacOptions in(Compile, doc) ++= Opts.doc.version(ver)) ++ Bintray.settings

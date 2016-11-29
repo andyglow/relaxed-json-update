@@ -14,6 +14,9 @@ abstract class AbstractRelaxedSpec(prefix: String) extends WordSpec {
     "not affect entity if json is not empty, but there is no related fields" in new Scope {
       (Relaxed(profile) updated """{"foo": "bar"}""") mustBe profile
     }
+    "not affect entity's 'id' if json contains 'id' but it is marked as 'skip'" in new Scope {
+      (Relaxed(profile) updated """{"id": "updated"}""") mustBe profile
+    }
     "affect entity's 'name' if json contains 'name' property" in new Scope {
       (Relaxed(profile) updated """{"name": "updated"}""") mustBe profile.copy(name = "updated")
     }

@@ -12,6 +12,19 @@ trait Reader {
   def optOpt[T: Reads](field: String): Option[Option[T]]
 }
 
+trait ReaderSupport[T] extends Reader {
+  def isNull: T => Boolean
+  def ctor: T => Reader
+  def get(field: String): Option[T]
+  def getOpt(field: String): Option[Option[T]] = get(field) match {
+    case None                 => None
+    case Some(x) if isNull(x) => Some(None)
+    case Some(x)              => Some(Some(x))
+  }
+  override def reader(field: String): Option[Reader] = get(field) map ctor
+  override def readerOpt(field: String): Option[Option[Reader]] = getOpt(field) map {_ map ctor}
+}
+
 trait Updater[T] {
   def apply(entity: T, u: Reader): T
 }
@@ -63,8 +76,6 @@ object Relaxed {
 
     val out =
       q"""
-        import com.github.andyglow.relaxed.Relaxed._
-
         new Updater[$tpe] {
           def apply(entity: $tpe, u: Reader): $tpe = {
             ..$definitions

@@ -3,31 +3,24 @@ package com.github.andyglow.relaxed
 import com.fasterxml.jackson.core.`type`.TypeReference
 import com.fasterxml.jackson.databind._
 
-case class JacksonSupport(json: JsonNode) extends Reader {
+case class JacksonSupport(json: JsonNode) extends Reader with ReaderSupport[JsonNode] {
+  def isNull: (JsonNode) => Boolean = _.isNull
+  def ctor: (JsonNode) => JacksonSupport = JacksonSupport.apply
+
   def get(field: String): Option[JsonNode] = {
     val node = json.findPath(field)
     if (node.isMissingNode) None else Some(node)
   }
 
-  override def reader(field: String): Option[Reader] = get(field) map JacksonSupport.apply
-  override def readerOpt(field: String): Option[Option[Reader]] = get(field) match {
-    case None                       => None
-    case Some(json) if json.isNull  => Some(None)
-    case Some(json)                 => Some(Some(JacksonSupport(json)))
-  }
   override def opt[T: Reads](field: String): Option[T] = {
     val r = implicitly[Reads[T]].asInstanceOf[JacksonSupport.JacksonReads[T]]
     get(field) map {x => r.mapper.readerFor(r.typeReference).readValue[T](x)}
   }
+
   override def optOpt[T: Reads](field: String): Option[Option[T]] = {
     val r = implicitly[Reads[T]].asInstanceOf[JacksonSupport.JacksonReads[T]]
-    get(field) match {
-      case None                       => None
-      case Some(json) if json.isNull  => Some(None)
-      case Some(json)                 => Some(Some(r.mapper.readerFor(r.typeReference).readValue[T](json)))
-    }
+    getOpt(field) map {_ map {x => r.mapper.readerFor(r.typeReference).readValue[T](x)}}
   }
-
 }
 
 object JacksonSupport {
@@ -54,5 +47,4 @@ object JacksonSupport {
       }
     }
   }
-
 }

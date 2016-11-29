@@ -1,6 +1,7 @@
 package com.github.andyglow.relaxed
 
-import io.circe._, io.circe.generic.auto._, io.circe.parser._, io.circe.syntax._
+import io.circe._
+import io.circe.generic.auto._
 
 import scala.language.implicitConversions
 
