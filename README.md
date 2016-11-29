@@ -141,6 +141,7 @@ What if we try to solve it without additional classes.
 ```
 
 _Pros & Cons_
+
 Event better as we can skip creating additional infrastructure (Form classes, Marshallers).
 
 ## Idea
