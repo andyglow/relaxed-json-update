@@ -114,8 +114,37 @@ case class ProfileUpdate(name: Option[String], password: Option[String]) {
 This solution is much better but have one significant drawback. You have to write lot of boilerplate code.
 Again. Just think about necessity to support this solution having rich class structure. It may become a nightmare.
 
+### Step 3
+What if we try to solve it without additional classes.
+ 
+```scala
+(put & path("profiles" / Segment) & entity(as[JsValue])) { (id, json) =>
+  rejectEmptyResponse {
+    complete {
+      val entity: Option[Profile] = db get id
+      for {entity <- entity} yield {
+        for {
+          name <- (json \ "name").validateOpt[String]
+          password <- (json \ "password").validateOpt[String]
+        } yield {
+          val updated = entity.copy(
+            name = name,
+            password = password)
+           
+          db.update(id, updated)
+          updated
+        } toOption
+      } 
+    }
+  }
+}
+```
+
+_Pros & Cons_
+Event better as we can skip creating additional infrastructure (Form classes, Marshallers).
+
 ## Idea
-So what exactly this solution does is automate the approach we invented on step 2 by involving scala macros.
+So what exactly this solution does is automate the approach we invented on step 3 by involving scala macros.
 
 1. You don't need to write special `*Update` classes.
 2. You don't need to write `copy` boilerplate.
