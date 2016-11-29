@@ -190,11 +190,27 @@ libraryDependencies += "com.github.andyglow" %% "relaxed-json-update-argonaut" %
 libraryDependencies += "com.github.andyglow" %% "relaxed-json-update-json4s" % "${LATEST_VERSION}"
 ```
 
-- api [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-api/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-api/_latestVersion)
-- play-json [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-play-json/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-play-json/_latestVersion)
-- spray-json [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-spray-json/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-spray-json/_latestVersion)
-- jackson (scala module) [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-jackson/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-jackson/_latestVersion)
-- circe [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-circe/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-circe/_latestVersion)
-- upickle [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-upickle/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-upickle/_latestVersion)
-- argonaut [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-argonaut/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-argonaut/_latestVersion)
-- json4s [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-json4s/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-json4s/_latestVersion)
+- api
+  [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-api/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-api/_latestVersion)
+  [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-api_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-api_2.11)
+- play-json
+  [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-play-json/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-play-json/_latestVersion)
+  [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-play-json_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-play-json_2.11)
+- spray-json
+  [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-spray-json/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-spray-json/_latestVersion)
+  [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-spray-json_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-spray-json_2.11)
+- jackson (scala module)
+  [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-jackson/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-jackson/_latestVersion)
+  [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-jackson_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-jackson_2.11)
+- circe
+  [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-circe/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-circe/_latestVersion)
+  [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-circe_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-circe_2.11)
+- upickle
+  [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-upickle/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-upickle/_latestVersion)
+  [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-upickle_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-upickle_2.11)
+- argonaut
+  [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-argonaut/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-argonaut/_latestVersion)
+  [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-argonaut_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-argonaut_2.11)
+- json4s
+  [ ![Download](https://api.bintray.com/packages/andyglow/scala-tools/relaxed-json-update-json4s/images/download.svg) ](https://bintray.com/andyglow/scala-tools/relaxed-json-update-json4s/_latestVersion)
+  [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-json4s_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.andyglow/relaxed-json-update-json4s_2.11)
