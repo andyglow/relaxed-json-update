@@ -18,7 +18,7 @@ abstract class AbstractRelaxedSpec(prefix: String) extends WordSpec {
       (Relaxed(profile) updated """{"id": "updated"}""") mustBe profile
     }
     "affect entity's 'name' if json contains 'name' property" in new Scope {
-      (Relaxed(profile) updated """{"name": "updated"}""") mustBe profile.copy(name = "updated")
+      (Relaxed(profile) updated """{"name": "updated"}""") mustBe profile.copy(name = FullName("updated"))
     }
     "affect entity's 'alias' if json contains 'alias' property" in new Scope {
       (Relaxed(profile) updated """{"alias": "updated"}""") mustBe profile.copy(alias = Some("updated"))
@@ -48,8 +48,8 @@ abstract class AbstractRelaxedSpec(prefix: String) extends WordSpec {
 
   trait Scope {
     val profile = Profile(
-      id = "id",
-      name = "name",
+      id = ProfileId("id"),
+      name = FullName("name"),
       address = Address(
         city = "city",
         street = "street",

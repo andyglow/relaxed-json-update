@@ -34,10 +34,35 @@ case class Relaxed[T](entity: T) {
 }
 
 object Relaxed {
+  import scala.reflect.macros.Universe
+
   def updater[T]: Updater[T] = macro updaterImpl[T]
+
+  sealed trait ResultingType {def tpe: Universe#Type}
+  object ResultingType {
+
+    case class ValueClass(tpe: Universe#Type, innerType: Universe#Type) extends ResultingType
+    case class CaseClass(tpe: Universe#Type) extends ResultingType
+    case class Generic(tpe: Universe#Type) extends ResultingType
+
+    def apply(t: Universe#Type): ResultingType = {
+      val symbol = t.typeSymbol
+      require(symbol.isClass)
+
+      symbol.asClass match {
+        case x if x.isCaseClass && !x.isDerivedValueClass => CaseClass(t)
+        case x if x.isCaseClass && x.isDerivedValueClass =>
+          val innerArg = x.primaryConstructor.asMethod.paramLists.head.head
+          val innerType = innerArg.typeSignature
+          ValueClass(t, innerType)
+        case _ => Generic(t)
+      }
+    }
+  }
 
   def updaterImpl[T: c.WeakTypeTag](c: blackbox.Context): c.Expr[Updater[T]] = {
     import c.universe._
+    import ResultingType._
 
     val tpe = weakTypeOf[T]
     val optionTpe = weakTypeOf[Option[_]]
@@ -45,23 +70,24 @@ object Relaxed {
     val fields = Util.fieldMap(c)(tpe) map { case (n, t) =>
       val path          = n.decodedName.toString
       val isOption      = t <:< optionTpe
-      val resultingType = if (isOption) t.typeArgs.head else t
-      val isCaseClass   = resultingType.typeSymbol.isClass && resultingType.typeSymbol.asClass.isCaseClass
+      val resultingType = if (isOption) ResultingType(t.typeArgs.head) else ResultingType(t)
 
-      val expr = (isOption, isCaseClass) match {
-        case (false, false) => q"val $n: $t = u.opt[$resultingType]($path) getOrElse entity.$n"
-        case (true, false)  => q"val $n: $t = u.optOpt[$resultingType]($path) getOrElse entity.$n"
-        case (false, true)  => q"val $n: $t = u.reader($path) map {x => implicitly[Updater[$resultingType]].apply(entity.$n, x)} getOrElse entity.$n"
-        case (true, true)   => q"""
+      val expr = (isOption, resultingType) match {
+        case (false, Generic(ft: Type))             => q"val $n: $t = u.opt[$ft]($path) getOrElse entity.$n"
+        case (true, Generic(ft: Type))              => q"val $n: $t = u.optOpt[$ft]($path) getOrElse entity.$n"
+        case (false, ValueClass(ft: Type, i: Type)) => q"val $n: $t = u.opt[$i]($path) map ${ft.typeSymbol.companion}.apply getOrElse entity.$n"
+        case (true, ValueClass(ft: Type, i: Type))  => q"val $n: $t = u.optOpt[$i]($path) map {_ map ${ft.typeSymbol.companion}.apply} getOrElse entity.$n"
+        case (false, CaseClass(ft: Type))           => q"val $n: $t = u.reader($path) map {x => implicitly[Updater[$ft]].apply(entity.$n, x)} getOrElse entity.$n"
+        case (true, CaseClass(ft: Type))            => q"""
                                  val $n: $t = {
                                    val r: Option[Option[Reader]] = u.readerOpt($path)
                                    (r, entity.$n) match {
                                      case (None, None)              => None
                                      case (Some(None), None)        => None
-                                     case (Some(Some(r)), None)     => u.opt[$resultingType]($path)
+                                     case (Some(Some(r)), None)     => u.opt[$ft]($path)
                                      case (None, Some(a))           => Some(a)
                                      case (Some(None), Some(a))     => None
-                                     case (Some(Some(r)), Some(a))  => Some(implicitly[Updater[$resultingType]].apply(a, r))
+                                     case (Some(Some(r)), Some(a))  => Some(implicitly[Updater[$ft]].apply(a, r))
                                    }
                                  }
                                 """
@@ -76,6 +102,8 @@ object Relaxed {
 
     val out =
       q"""
+        import com.github.andyglow.relaxed._
+
         new Updater[$tpe] {
           def apply(entity: $tpe, u: Reader): $tpe = {
             ..$definitions

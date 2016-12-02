@@ -2,7 +2,7 @@ import sbt._
 import Keys._
 
 object BuildSettings {
-  val ver = "0.0.2"
+  val ver = "0.0.3"
   val projectId = "relaxed-json-update"
 
   lazy val noSources = Seq(
